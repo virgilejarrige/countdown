@@ -14,6 +14,6 @@ chmod+x countdown
 
 Use ctrl+c to stop the coundown.
   
-## dependencies
+## Dependencies
   - lolcat
   - fidget
