@@ -10,6 +10,7 @@ Once the time is up, "STOP" will be blinking.
 Once you download the file "countdown" :
 
 chmod+x countdown
+
 ./countdown <number of minutes>
 
 Use ctrl+c to stop the coundown.
