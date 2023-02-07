@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# police utilisée par figlet
+# $font="script"
+
+clear
+
+# Vérifie la présence de figlet
+if ! command -v figlet > /dev/null; then
+    echo "figlet n'est pas installé."
+    echo "Veuillez exécuter la commande suivante pour l'installer : sudo apt install figlet"
+    exit 1
+fi
+
+# Vérifie la présence de lolcat
+if ! command -v lolcat > /dev/null; then
+    echo "lolcat n'est pas installé."
+    echo "Veuillez exécuter la commande suivante pour l'installer : sudo apt install lolcat"
+    exit 1
+fi
+
+# Vérifie que le temps en minutes a été donné en argument
+if [ $# -lt 1 ]; then
+    echo "Indiquez le temps souhaité en argument : $0 temps_en_minutes"
+    exit 1
+fi
+
+if ! [[ $1 =~ ^[0-9]+$ ]]; then
+    echo "Merci d'entrer un nombre entier pour déterminer le nombre de minutes souhaitées."
+    exit 1
+fi
+
+
+# Calcule le temps en secondes
+temps_en_secondes=$(( $1 * 60 ))
+
+lines=$(tput lines)
+milieu=$(echo "($lines+1)/2" | bc)
+
+# Boucle jusqu'à ce que le temps soit écoulé
+while [ $temps_en_secondes -gt 0 ]; do
+    heures=$(( $temps_en_secondes / 3600 ))
+    minutes=$(( ($temps_en_secondes - $heures * 3600) / 60 ))
+    secondes=$(( $temps_en_secondes - $heures * 3600 - $minutes * 60 ))
+
+#    lines=$(tput lines)
+    i=$milieu
+    while [ $i -gt 0 ]; do
+        echo -e ""
+	i=$(( $i -1 ))
+    done
+
+    # Affiche le temps restant en utilisant le format défini
+    if [ $temps_en_secondes -lt $(($1 * 60 * 10 / 100)) ]; then
+       # de couleur quand il reste 10% du temps
+	echo -e "\033[92m$(figlet -ctW -f big -w 200 $(printf "$format" $minutes $secondes))\033[0m" | lolcat -S 100
+    else
+
+        if [ $temps_en_secondes -gt 3599 ]; then
+           # Si plus d'une heure, affiche au format hh:mm:ss 
+	   format="%02d:%02d:%02d"
+           echo "$(figlet -ctW -f big -w 200 $(printf "$format" $heures $minutes $secondes))"
+        else
+           # Si moins d'une heure, affiche au format mm:ss
+	   format="%02d:%02d"
+           echo "$(figlet -ctW -f big -w 200 $(printf "$format" $minutes $secondes))"
+        fi
+    fi
+    sleep 1
+    clear
+    temps_en_secondes=$(( $temps_en_secondes - 1 ))
+done
+
+
+
+# Quand le temps est écoulé, affiche "STOP" qui clignote
+
+while [ $milieu -gt 0 ]; do
+    echo -e ""
+    milieu=$(( $milieu -1 ))
+done
+echo -e "\033[5m$(figlet -ctW -f big -w 200 STOP)\033[0m" | lolcat -S 100
+
