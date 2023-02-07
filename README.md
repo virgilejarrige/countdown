@@ -11,10 +11,16 @@ Once you download the file "countdown" :
 
 chmod+x countdown
 
-./countdown <number of minutes>
+./countdown number_of_minutes
 
 Use ctrl+c to stop the coundown.
-  
+
+## examples
+
+./countdown 10
+
+./countdown 666
+
 ## Dependencies
   - lolcat
   - fidget
