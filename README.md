@@ -15,7 +15,7 @@ chmod+x countdown
 
 Use ctrl+c to stop the coundown.
 
-## examples
+## Examples
 
 ./countdown 10
 
