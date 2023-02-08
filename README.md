@@ -9,7 +9,9 @@ Once the time is up, "STOP" will start blinking.
 ## How to use this
 
 wget https://raw.githubusercontent.com/virgilejarrige/countdown/main/countdown
+
 chmod+x countdown
+
 ./countdown number_of_minutes
 
 ctrl+c to stop the coundown.
