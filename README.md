@@ -2,18 +2,17 @@
 
 ## Description
 
-Simple lowtech shell script that can be used as a countdown during a seminar, a conference,... to indicate how much time is left to the orator.
+Simple lowtech shell script that can be used as a countdown during a seminar, a conference etc. to indicate to the orator how much time is left.
 Once the countdown has reached 10% of the time left, it will be displayed in yellow/red.
-Once the time is up, "STOP" will be blinking.
+Once the time is up, "STOP" will start blinking.
 
 ## How to use this
-Once you download the file "countdown" :
 
+wget https://raw.githubusercontent.com/virgilejarrige/countdown/main/countdown
 chmod+x countdown
-
 ./countdown number_of_minutes
 
-Use ctrl+c to stop the coundown.
+ctrl+c to stop the coundown.
 
 ## Examples
 
