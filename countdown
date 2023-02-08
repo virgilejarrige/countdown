@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# police utilisée par figlet
-# $font="script"
-
 clear
 
 # Vérifie la présence de figlet
